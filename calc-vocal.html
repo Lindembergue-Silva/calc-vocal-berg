@@ -1,0 +1,186 @@
+Calculadora Interativa de Classificação Vocal
+Professor Me. Lindembergue Silva
+  <!DOCTYPE html>
+  <html lang="pt-BR">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Calculadora de Classificação Vocal</title>
+      <style>
+          body {
+              font-family: Arial, sans-serif;
+              margin: 20px;
+              padding: 20px;
+              background-color: #f4f4f4;
+              border-radius: 8px;
+          }
+          h1 {
+              text-align: center;
+          }
+          .container {
+              max-width: 600px;
+              margin: auto;
+              background: white;
+              padding: 20px;
+              border-radius: 8px;
+              box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          }
+          select {
+              width: 100%;
+              padding: 10px;
+              margin: 10px 0;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+          }
+          button {
+              width: 100%;
+              padding: 10px;
+              background-color: #28a745;
+              color: white;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+          }
+          button:hover {
+              background-color: #218838;
+          }
+          .result {
+              margin-top: 20px;
+              font-size: 1.2em;
+              text-align: center;
+              color: #333;
+          }
+      </style>
+  </head>
+  <body>
+      <div class="container">
+          <h1>Calculadora de Classificação Vocal</h1>
+          <label for="nota-grave">Escolha a Nota Mais Grave:</label>
+          <select id="nota-grave">
+              <option value="">Selecione uma nota</option>
+              <option value="C2">C2</option>
+              <option value="C#2">C#2</option>
+              <option value="D2">D2</option>
+              <option value="D#2">D#2</option>
+              <option value="E2">E2</option>
+              <option value="F2">F2</option>
+              <option value="F#2">F#2</option>
+              <option value="G2">G2</option>
+              <option value="G#2">G#2</option>
+              <option value="A2">A2</option>
+              <option value="A#2">A#2</option>
+              <option value="B2">B2</option>
+              <option value="C3">C3</option>
+              <option value="C#3">C#3</option>
+              <option value="D3">D3</option>
+              <option value="D#3">D#3</option>
+              <option value="E3">E3</option>
+              <option value="F3">F3</option>
+              <option value="F#3">F#3</option>
+              <option value="G3">G3</option>
+              <option value="G#3">G#3</option>
+              <option value="A3">A3</option>
+              <option value="A#3">A#3</option>
+              <option value="B3">B3</option>
+              <option value="C4">C4</option>
+              <option value="C#4">C#4</option>
+              <option value="D4">D4</option>
+              <option value="D#4">D#4</option>
+              <option value="E4">E4</option>
+              <option value="F4">F4</option>
+              <option value="F#4">F#4</option>
+              <option value="G4">G4</option>
+              <option value="G#4">G#4</option>
+              <option value="A4">A4</option>
+              <option value="A#4">A#4</option>
+              <option value="B4">B4</option>
+              <option value="C5">C5</option>
+              <option value="C#5">C#5</option>
+              <option value="D5">D5</option>
+              <option value="D#5">D#5</option>
+              <option value="E5">E5</option>
+              <option value="F5">F5</option>
+              <option value="F#5">F#5</option>
+              <option value="G5">G5</option>
+              <option value="G#5">G#5</option>
+              <option value="A5">A5</option>
+          </select>
+          
+          <label for="nota-aguda">Escolha a Nota Mais Aguda:</label>
+          <select id="nota-aguda">
+              <option value="">Selecione uma nota</option>
+              <option value="C4">C4</option>
+              <option value="C#4">C#4</option>
+              <option value="D4">D4</option>
+              <option value="D#4">D#4</option>
+              <option value="E4">E4</option>
+              <option value="F4">F4</option>
+              <option value="F#4">F#4</option>
+              <option value="G4">G4</option>
+              <option value="G#4">G#4</option>
+              <option value="A4">A4</option>
+              <option value="A#4">A#4</option>
+              <option value="B4">B4</option>
+              <option value="C5">C5</option>
+              <option value="C#5">C#5</option>
+              <option value="D5">D5</option>
+              <option value="D#5">D#5</option>
+              <option value="E5">E5</option>
+              <option value="F5">F5</option>
+              <option value="F#5">F#5</option>
+              <option value="G5">G5</option>
+              <option value="G#5">G#5</option>
+              <option value="A5">A5</option>
+          </select>
+          
+          <button onclick="classificar()">Classificar</button>
+          
+          <div class="result" id="resultado"></div>
+      </div>
+
+      <script>
+          function classificar() {
+              const notaGrave = document.getElementById('nota-grave').value;
+              const notaAguda = document.getElementById('nota-aguda').value;
+              let resultado = '';
+
+              const classificacoes = {
+                  'Soprano': ['C4', 'C6'],
+                  'Mezzo-Soprano': ['A3', 'A5'],
+                  'Contralto': ['F3', 'F5'],
+                  'Tenor': ['C3', 'C5'],
+                  'Barítono': ['G2', 'G4'],
+                  'Baixo': ['C2', 'C4']
+              };
+
+              // Função para converter notas em índices
+              function notaParaIndice(nota) {
+                  const notas = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+                  const octavas = [2, 3, 4, 5, 6]; // Considerando até C6
+                  const [prefixo, sufixo] = [nota.slice(0, -1), nota.slice(-1)];
+                  const indiceNota = notas.indexOf(prefixo);
+                  const indiceOctava = octavas.indexOf(parseInt(sufixo));
+                  return indiceNota + (indiceOctava + 2) * 12; // Ajuste para o índice
+              }
+
+              const indiceGrave = notaParaIndice(notaGrave);
+              const indiceAguda = notaParaIndice(notaAguda);
+
+              for (const [classificacao, [grave, aguda]] of Object.entries(classificacoes)) {
+                  const indiceLimiteGrave = notaParaIndice(grave);
+                  const indiceLimiteAguda = notaParaIndice(aguda);
+                  if (indiceGrave >= indiceLimiteGrave && indiceAguda <= indiceLimiteAguda) {
+                      resultado = `Você se classifica como: ${classificacao}`;
+                      break;
+                  }
+              }
+
+              if (!resultado) {
+                  resultado = 'Classificação não encontrada. Verifique as notas inseridas.';
+              }
+
+              document.getElementById('resultado').innerText = resultado;
+          }
+      </script>
+  </body>
+  </html>
